@@ -10,43 +10,55 @@ the same decisions across every project.
 I use Claude Code as a collaborator throughout. That's not a footnote — it
 shapes how I approach architecture, iteration, and documentation.
 
+## Platform
+
+### `nodalyze`
+
+A platform for structured reasoning under uncertainty. Nodalyze combines a
+Bayesian network inference engine with domain-specific knowledge packages to
+support five activities: authoring networks, using them in practice, reviewing
+reasoning, training practitioners, and measuring reasoning quality.
+
+The platform is domain-agnostic. Domain packages provide network structure,
+annotation content, training cases, and workflow definitions. The first domain
+package is for mental health differential diagnosis.
+
 ## Infrastructure
 
 ### `frontend`
 
-Shared foundation for building AI-forward applications. Three independent packages:
+A domain-agnostic toolkit for building data-dense professional applications.
+Two packages enforce one dependency boundary:
 
-| Package | Description |
-|---|---|
-| `@alster-built/field-types` | Zero-React. Pure TypeScript types and validation for dynamic field definitions. |
-| `@alster-built/field-renderer` | Stateless React/MUI rendering layer. Consumes field-types, renders nothing opinionated. |
-| `@alster-built/ui-kit` | Theme and layout components. Independent of the field system. |
+| Package                | Description                                                                                                          |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `@alster-built/core`   | Zero-React. Pure TypeScript types, field definitions, and validation. Consumable by backends, CLIs, and build tools. |
+| `@alster-built/ui-kit` | All React/MUI rendering: field components, form renderers, app chrome, color system, markdown editing, and theme.    |
 
-The field system is built for applications where form structure can't be known
-at build time — where the shape of the UI arrives at runtime, not compile time.
-That matters in AI applications. It's why it exists.
+Built for data-dense, professional, information-first interfaces — not
+consumer-friendly-spacious. Form structure arrives at runtime, not compile
+time.
+
+### `backend-services`
+
+A shared backend supporting alster-built frontend applications. Provides
+API endpoints that frontends cannot or should not run client-side:
+probabilistic inference via pgmpy and a Claude AI proxy that keeps the
+Anthropic API key server-side. Includes a TypeScript client package for
+compile-time safety.
 
 ### `claude-skills`
 
-Claude Code skill definitions used across projects — reusable context
-scaffolding for common patterns so the collaboration starts from a shared
-foundation instead of scratch.
+A shared library of Claude Code skills for the alster-built ecosystem.
+Consuming projects submodule it into `.claude/skills/` so Claude picks up
+the skills automatically. Skills are opinionated, prescriptive, and portable
+— they encode decisions, not menus.
 
-## Applications
+### `research-projects`
 
-### `bayes-studio`
-A general-purpose Bayesian network authoring, debugging, and inference tool.
-Build networks visually, define conditional probability tables, set evidence,
-run inference, and surface domain-specific annotations — all in the browser.
-
-### `bokeh-dx` *(coming soon)*
-A proof of concept using a Bayesian network to assist with clinical assessments.
-
-## A note on scope
-
-Backends here are functional, not precious. Production-grade architecture is
-not the goal. The goal is clear, usable frontend systems — and a record of how
-I think and build.
+Organized research projects that inform development decisions across the org.
+Each project synthesizes academic and technical literature with explicit
+sourcing. Output feeds design documents, specifications, and domain expertise.
 
 ## Access
 
