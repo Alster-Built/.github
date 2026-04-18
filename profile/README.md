@@ -20,8 +20,12 @@ support five activities: authoring networks, using them in practice, reviewing
 reasoning, training practitioners, and measuring reasoning quality.
 
 The platform is domain-agnostic. Domain packages provide network structure,
-annotation content, training cases, and workflow definitions. The first domain
-package is for mental health differential diagnosis.
+annotation content, training cases, and workflow definitions. The first real
+domain package is **bokeh-dx** (mental health mood disorder differential
+diagnosis). Five demo domains exercise the platform against bare networks of
+varying size and shape: the classic **Asia** (Lauritzen & Spiegelhalter) and
+**rain-sprinkler** (Pearl) reference networks, **HEPAR II** liver disease
+(Oniśko et al.), plus automotive troubleshooting and insurance risk.
 
 ## Infrastructure
 
@@ -37,22 +41,27 @@ Two packages enforce one dependency boundary:
 
 Built for data-dense, professional, information-first interfaces — not
 consumer-friendly-spacious. Form structure arrives at runtime, not compile
-time.
+time. The UI kit is opinionated enough that many raw `@mui/material` imports in
+app code are treated as a code smell.
 
 ### `backend-services`
 
 A shared backend supporting alster-built frontend applications. Provides
 API endpoints that frontends cannot or should not run client-side:
-probabilistic inference via pgmpy and a Claude AI proxy that keeps the
-Anthropic API key server-side. Includes a TypeScript client package for
-compile-time safety.
+probabilistic inference via pgmpy (posterior queries, information-gain
+ranking, sensitivity analysis) and a Claude AI proxy with SSE streaming
+and tool use that keeps the Anthropic API key server-side. Includes a
+TypeScript client package for compile-time safety.
 
 ### `claude-skills`
 
 A shared library of Claude Code skills for the alster-built ecosystem.
-Consuming projects submodule it into `.claude/skills/` so Claude picks up
-the skills automatically. Skills are opinionated, prescriptive, and portable
-— they encode decisions, not menus.
+Consuming projects add it as a git submodule at `.claude/skills/` so
+Claude Code picks up the skills automatically. Skills are opinionated,
+prescriptive, and portable — they encode decisions, not menus. Coverage
+spans code, research, writing, and utility workflows, with skills
+composed into named pipelines (e.g., research brief → pipeline scaffold
+→ deep research → paper).
 
 ### `research-projects`
 
