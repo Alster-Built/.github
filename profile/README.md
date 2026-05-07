@@ -29,6 +29,11 @@ varying size and shape: the classic **Asia** (Lauritzen & Spiegelhalter) and
 **rain-sprinkler** (Pearl) reference networks, **HEPAR II** liver disease
 (Oniśko et al.), plus automotive troubleshooting and insurance risk.
 
+Inference runs as a `nodalyze`-owned service (`packages/bayes` for the
+pgmpy engine, `packages/app/src/services/bayesClient.ts` for the typed TS
+client) so each domain owns its own inference rather than sharing
+infrastructure.
+
 ## Applications
 
 ### `model-card-studio`
@@ -58,22 +63,21 @@ app code are treated as a code smell.
 
 ### `backend-services`
 
-A shared backend supporting alster-built frontend applications. Provides
-API endpoints that frontends cannot or should not run client-side:
-probabilistic inference via pgmpy (posterior queries, information-gain
-ranking, sensitivity analysis) and a Claude AI proxy with SSE streaming
-and tool use that keeps the Anthropic API key server-side. Includes a
-TypeScript client package for compile-time safety.
+A shared backend supporting alster-built frontend applications. Hosts the
+Claude AI proxy: SSE streaming, tool use, and Anthropic API key
+containment so the key never leaves the server. Includes a TypeScript
+client package (`@alster-built/backend-client`) for compile-time safety.
 
-### `claude-skills`
+### `claude-toolkit`
 
-A shared library of Claude Code skills for the alster-built ecosystem.
-Consuming projects add it as a git submodule at `.claude/skills/` so
-Claude Code picks up the skills automatically. Skills are opinionated,
-prescriptive, and portable — they encode decisions, not menus. Coverage
-spans code, research, writing, and utility workflows, with skills
-composed into named pipelines (e.g., research brief → pipeline scaffold
-→ deep research → paper).
+A Claude Code plugin bundling shared skills and slash commands for the
+alster-built ecosystem. Installed once per developer machine via
+`/plugin install claude-toolkit@alster-built`; edits in the working tree
+are live across every project. Skills are opinionated, prescriptive, and
+portable — they encode decisions, not menus. Coverage spans code,
+research, writing, and utility workflows, with skills composed into
+named pipelines (e.g., research brief → pipeline scaffold → deep
+research → paper).
 
 ### `research-projects`
 
