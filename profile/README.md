@@ -14,18 +14,30 @@ shapes how I approach architecture, iteration, and documentation.
 
 ### `nodalyze`
 
-A platform for structured reasoning under uncertainty. Nodalyze combines a
-Bayesian network inference engine with domain-specific knowledge packages to
-support five activities: authoring networks, using them in practice, reviewing
-reasoning, training practitioners, and measuring reasoning quality.
+A platform for reasoning under uncertainty, built as a domain-pluggable DSL
+over a Bayesian computation graph (with some extensions). Authors encode
+domain knowledge in the DSL; practitioners, reviewers, and trainees consume
+it through role-specific workflows.
 
-The platform is domain-agnostic. Domain packages provide network structure,
-annotation content, training cases, and workflow definitions. The first real
+Five activities are supported: authoring, using in practice, reviewing
+reasoning, training practitioners, and measuring reasoning quality. Domain
+packages provide network structure, annotation content, training cases, and
+workflow definitions. The first real
 domain package is **bokeh-dx** (mental health mood disorder differential
 diagnosis). Five demo domains exercise the platform against bare networks of
 varying size and shape: the classic **Asia** (Lauritzen & Spiegelhalter) and
 **rain-sprinkler** (Pearl) reference networks, **HEPAR II** liver disease
 (Oniśko et al.), plus automotive troubleshooting and insurance risk.
+
+## Applications
+
+### `model-card-studio`
+
+A chat-driven editor for authoring ML model cards. Users converse with
+an assistant that asks structured questions, proposes field values, and
+renders inline forms where input is needed; the current card stays
+visible in a side panel and exports as markdown or JSON. Built on
+`@alster-built/ui-kit`, `core`, and `backend-client`.
 
 ## Infrastructure
 
