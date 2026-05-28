@@ -14,35 +14,24 @@ shapes how I approach architecture, iteration, and documentation.
 
 ### `nodalyze`
 
-A platform for reasoning under uncertainty, built as a domain-pluggable DSL
-over a Bayesian computation graph (with some extensions). Authors encode
-domain knowledge in the DSL; practitioners, reviewers, and trainees consume
-it through role-specific workflows.
-
-Five activities are supported: authoring, using in practice, reviewing
-reasoning, training practitioners, and measuring reasoning quality. Domain
-packages provide network structure, annotation content, training cases, and
-workflow definitions. The first real
-domain package is **bokeh-dx** (mental health mood disorder differential
-diagnosis). Five demo domains exercise the platform against bare networks of
-varying size and shape: the classic **Asia** (Lauritzen & Spiegelhalter) and
-**rain-sprinkler** (Pearl) reference networks, **HEPAR II** liver disease
-(Oniśko et al.), plus automotive troubleshooting and insurance risk.
-
-Inference runs as a `nodalyze`-owned service (`packages/bayes` for the
-pgmpy engine, `packages/app/src/services/bayesClient.ts` for the typed TS
-client) so each domain owns its own inference rather than sharing
-infrastructure.
+A platform for decision-support applications in domains where the
+reasoning behind a decision has to be defensible — inspectable,
+reproducible, attributable to a source. Built on Bayesian networks,
+with a domain-pluggable DSL that lets experts encode their reasoning
+once and practitioners consume it through role-specific workflows.
+Case studies are in progress.
 
 ## Applications
 
-### `model-card-studio`
+### `form-filler-studio`
 
-A chat-driven editor for authoring ML model cards. Users converse with
-an assistant that asks structured questions, proposes field values, and
-renders inline forms where input is needed; the current card stays
-visible in a side panel and exports as markdown or JSON. Built on
-`@alster-built/ui-kit`, `core`, and `backend-client`.
+A chat-driven editor for authoring structured documents from a schema
+pack. Users converse with an assistant that asks structured questions,
+proposes field values, and renders inline forms where input is needed;
+the current document stays visible in a side panel and exports as
+markdown or JSON. New document types plug in as packs — a schema, an
+option set, and a markdown renderer — without touching the app shell.
+Built on `frontend`, and `backend-client`.
 
 ## Infrastructure
 
@@ -88,7 +77,7 @@ sourcing. Output feeds design documents, specifications, and domain expertise.
 ## Access
 
 Repos are private. Case studies and writeups for projects in this org
-will be published at mechaffin.github.io.
+will be published at [mechaffin.github.io/blog](https://mechaffin.github.io/blog).
 
 ---
 
